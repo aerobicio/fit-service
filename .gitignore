@@ -6,11 +6,9 @@
 
 # Ignore bundler config.
 /.bundle
+/.env
 
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
-# Ignore all logfiles and tempfiles.
+/bin/trinidad
+/config/database.yml
 /log/*.log
 /tmp
