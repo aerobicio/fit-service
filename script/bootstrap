@@ -17,6 +17,7 @@ check_version "bundle -v"
 check_version "psql --version"
 
 bundle
+bundle binstubs rubocop --force
 bundle binstubs trinidad --force
 
 cp -n .env.example .env

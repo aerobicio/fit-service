@@ -17,4 +17,5 @@ end
 
 group :test, :development do
   gem 'minitest-rails'
+  gem 'rubocop'
 end
