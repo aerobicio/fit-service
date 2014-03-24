@@ -1,0 +1,25 @@
+box: tsungg/jruby@0.0.6
+build:
+    steps:
+        - bundle-install
+
+        # A custom script step, name value is used in the UI
+        # and the code value contains the command that get executed
+        - script:
+            name: echo ruby information
+            code: |
+                echo "ruby version $(ruby --version) running"
+                echo "from location $(which ruby)"
+                echo -p "gem list: $(gem list)"
+
+        - script:
+            name: run rubocop
+            code: bundle exec rake rubocop
+        - script:
+            name: run minitest
+            code: bundle exec rake minitest
+    after-steps:
+        - sherzberg/slack-notify:
+            subdomain: aerobic
+            token: $SLACK_TOKEN
+            channel: general
