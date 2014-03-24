@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.9'
+ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.11'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.4'
