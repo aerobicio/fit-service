@@ -1,4 +1,6 @@
 box: tsungg/jruby@0.0.6
+services:
+    - wercker/postgresql
 build:
     steps:
         - bundle-install
@@ -15,6 +17,10 @@ build:
         - script:
             name: run rubocop
             code: bundle exec rake rubocop
+        - rails-database-yml
+        - script:
+            name: db setup
+            code: RAILS_ENV=test bundle exec rake db:structure:load
         - script:
             name: run unit tests
             code: bundle exec rake spec
