@@ -16,6 +16,10 @@ group :doc do
 end
 
 group :test, :development do
-  gem 'minitest-rails'
+  gem 'rspec-rails'
   gem 'rubocop'
+end
+
+group :test do
+  gem 'shoulda-matchers'
 end
