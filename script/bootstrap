@@ -18,7 +18,7 @@ check_version "psql --version"
 
 bundle
 bundle binstubs rubocop --force
-bundle binstubs trinidad --force
+bundle binstubs puma --force
 
 cp -n .env.example .env
 cp -n config/database.yml.example config/database.yml
