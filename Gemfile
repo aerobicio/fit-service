@@ -5,6 +5,7 @@ ruby '1.9.3', :engine => 'jruby', :engine_version => '1.7.11'
 gem 'rails', '4.0.4'
 
 gem 'activerecord-jdbcpostgresql-adapter'
+gem 'grape'
 gem 'trinidad'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder

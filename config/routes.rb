@@ -1,3 +1,3 @@
 FitService::Application.routes.draw do
-  resources :workouts, only:  :create
+  mount Fit::ApiV1 => '/'
 end
