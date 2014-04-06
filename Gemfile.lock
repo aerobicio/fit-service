@@ -73,6 +73,7 @@ GEM
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jdbc-postgres (9.3.1101)
+    jruby-rack (1.1.14)
     json (1.8.1-java)
     mail (2.5.4)
       mime-types (~> 1.16)
