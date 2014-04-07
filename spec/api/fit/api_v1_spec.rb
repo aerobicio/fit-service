@@ -37,7 +37,7 @@ describe Fit::ApiV1 do
     context 'with a valid workout id' do
       before do
         workout = FactoryGirl.create(:workout)
-        get "/v1/workouts/#{workout.id}"
+        get "/v1/workouts/#{workout.id}", api_token: ENV['API_TOKEN']
       end
 
       it 'should respond with HTTP 200 ok' do
@@ -61,11 +61,28 @@ describe Fit::ApiV1 do
       end
     end
 
+    context 'with a valid workout id and no API token' do
+      let(:errors) { JSON.parse(response.body)['error'] }
+
+      before do
+        workout = FactoryGirl.create(:workout)
+        get "/v1/workouts/#{workout.id}"
+      end
+
+      it 'should respond with HTTP 401 unauthorised' do
+        response.status.should == 401
+      end
+
+      it 'should return an unauthorized error' do
+        errors.include?('Unauthorised.').should be_true
+      end
+    end
+
     context 'with a non existent workout id' do
       let(:errors) { JSON.parse(response.body)['error'] }
 
       before do
-        get '/v1/workouts/100'
+        get '/v1/workouts/100', api_token: ENV['API_TOKEN']
       end
 
       it 'should respond with HTTP 404 not found' do
