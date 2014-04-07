@@ -12,21 +12,21 @@ module Fit
 
     helpers do
       def authenticate!
-        error!('Unauthorised.', 401) if api_token_not_valid?
+        error!('Unauthorised.', 401) unless valid_api_token?
       end
 
       private
 
-      def api_token_not_valid?
-        api_token_is_nil? || invalid_api_token?
+      def valid_api_token?
+        server_side_token_set? && api_token_matches_server_side_token?
       end
 
-      def api_token_is_nil?
-        ENV['API_TOKEN'].nil?
+      def server_side_token_set?
+        !ENV['API_TOKEN'].nil?
       end
 
-      def invalid_api_token?
-        ENV['API_TOKEN'] != params[:api_token]
+      def api_token_matches_server_side_token?
+        ENV['API_TOKEN'] == params[:api_token]
       end
     end
 
