@@ -10,6 +10,7 @@ gem 'puma', require: false
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2', require: false
+gem 'jfit', git: 'https://github.com/aerobicio/jfit.git', branch: 'replicate-fit-decode-example', require: false
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

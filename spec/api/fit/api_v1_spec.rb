@@ -5,7 +5,10 @@ require 'spec_helper'
 def login_with_basic_auth
   username = ENV['API_TOKEN']
   password = ''
-  { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
+  {
+    'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic
+    .encode_credentials(username, password)
+  }
 end
 
 describe Fit::ApiV1 do

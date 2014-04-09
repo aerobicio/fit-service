@@ -15,6 +15,7 @@ module Fit
     end
 
     helpers do
+
       private
 
       def valid_api_token?(token)
