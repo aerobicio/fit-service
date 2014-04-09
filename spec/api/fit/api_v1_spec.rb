@@ -2,13 +2,19 @@
 #
 require 'spec_helper'
 
+def login_with_basic_auth
+  username = ENV['API_TOKEN']
+  password = ''
+  { 'HTTP_AUTHORIZATION' => ActionController::HttpAuthentication::Basic.encode_credentials(username, password) }
+end
+
 describe Fit::ApiV1 do
   describe 'POST /v1/workouts' do
     context 'with no parameters' do
       let(:errors) { JSON.parse(response.body)['error'] }
 
       before do
-        post '/v1/workouts'
+        post '/v1/workouts', {}, login_with_basic_auth
       end
 
       it 'should respond with HTTP 400 bad request' do
@@ -37,7 +43,7 @@ describe Fit::ApiV1 do
     context 'with a valid workout id' do
       before do
         workout = FactoryGirl.create(:workout)
-        get "/v1/workouts/#{workout.id}", api_token: ENV['API_TOKEN']
+        get "/v1/workouts/#{workout.id}", {}, login_with_basic_auth
       end
 
       it 'should respond with HTTP 200 ok' do
@@ -49,7 +55,7 @@ describe Fit::ApiV1 do
       let(:errors) { JSON.parse(response.body)['error'] }
 
       before do
-        get '/v1/workouts/foo'
+        get '/v1/workouts/foo', {}, login_with_basic_auth
       end
 
       it 'should respond with HTTP 400 bad request' do
@@ -62,8 +68,6 @@ describe Fit::ApiV1 do
     end
 
     context 'with a valid workout id and no API token' do
-      let(:errors) { JSON.parse(response.body)['error'] }
-
       before do
         workout = FactoryGirl.create(:workout)
         get "/v1/workouts/#{workout.id}"
@@ -72,17 +76,13 @@ describe Fit::ApiV1 do
       it 'should respond with HTTP 401 unauthorised' do
         response.status.should == 401
       end
-
-      it 'should return an unauthorized error' do
-        errors.include?('Unauthorised.').should be_true
-      end
     end
 
     context 'with a non existent workout id' do
       let(:errors) { JSON.parse(response.body)['error'] }
 
       before do
-        get '/v1/workouts/100', api_token: ENV['API_TOKEN']
+        get '/v1/workouts/100', {}, login_with_basic_auth
       end
 
       it 'should respond with HTTP 404 not found' do

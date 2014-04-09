@@ -10,23 +10,23 @@ module Fit
     version 'v1', using: :path
     format :json
 
-    helpers do
-      def authenticate!
-        error!('Unauthorised.', 401) unless valid_api_token?
-      end
+    http_basic do |username, password|
+      valid_api_token?(username)
+    end
 
+    helpers do
       private
 
-      def valid_api_token?
-        server_side_token_set? && api_token_matches_server_side_token?
+      def valid_api_token?(token)
+        server_side_token_set? && api_token_matches_server_side_token?(token)
       end
 
       def server_side_token_set?
         !ENV['API_TOKEN'].nil?
       end
 
-      def api_token_matches_server_side_token?
-        ENV['API_TOKEN'] == params[:api_token]
+      def api_token_matches_server_side_token?(token)
+        ENV['API_TOKEN'] == token
       end
     end
 
@@ -43,7 +43,6 @@ module Fit
       requires :member_id, type: Integer
     end
     post :workouts do
-      authenticate!
     end
 
     desc 'Find a workout for a given id'
@@ -51,7 +50,6 @@ module Fit
       requires :id, type: Integer
     end
     get 'workouts/:id' do
-      authenticate!
       Workout.find(params[:id])
     end
   end
