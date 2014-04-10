@@ -13,6 +13,37 @@ end
 
 describe Fit::ApiV1 do
   describe 'POST /v1/workouts' do
+    context 'with valid parameters' do
+      before do
+        member = FactoryGirl.create(:user)
+        post '/v1/workouts', {
+          device_id: 1,
+          device_workout_id: 1,
+          fit_file: uploaded_activity,
+          member_id: member.id
+          }, login_with_basic_auth
+      end
+
+      it 'should respond with HTTP 201 created' do
+        response.status.should == 201
+      end
+
+      it 'should return a JSON representation of the newly created workout' do
+        json = JSON.parse(response.body)
+
+        json.include?('id').should be_true
+        json.include?('active_duration').should be_true
+        json.include?('duration').should be_true
+        json.include?('distance').should be_true
+        json.include?('start_time').should be_true
+        json.include?('end_time').should be_true
+        json.include?('uuid').should be_true
+        json.include?('device_id').should be_true
+        json.include?('device_workout_id').should be_true
+        json.include?('user_id').should be_true
+      end
+    end
+
     context 'with no parameters' do
       let(:errors) { JSON.parse(response.body)['error'] }
 

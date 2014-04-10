@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/aerobicio/jfit.git
-  revision: c78861f24e52b00ec092f45bb679757237fba0b7
+  revision: d98de87b7a6c86f9c15cadbfb094c6c7ce63701a
   branch: replicate-fit-decode-example
   specs:
     jfit (0.0.1-java)

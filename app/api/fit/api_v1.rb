@@ -2,6 +2,8 @@
 #
 require 'grape'
 require 'workout'
+require 'workout_creator'
+require 'base64'
 
 module Fit
   # ApiV1 defines version one of the fit-service API.
@@ -44,6 +46,24 @@ module Fit
       requires :member_id, type: Integer
     end
     post :workouts do
+      name = params[:fit_file].lines.first
+      fit_file = params[:fit_file].lines.to_a[1..-1].join
+      fit_file = fit_file.lines.to_a[0..-2].join
+      fit_file = Base64.decode64(fit_file)
+      fit_file = FitFile.new(name: name, binary_data: fit_file)
+
+      creator = WorkoutCreator.new(params[:member_id],
+                                 params[:device_id],
+                                 params[:device_workout_id],
+                                 fit_file)
+
+      workout = creator.persist_workout
+      fit_file.workout_id = workout.id
+      if workout.persisted? && fit_file.save
+        workout
+      else
+        raise 'lol'
+      end
     end
 
     desc 'Find a workout for a given id'
