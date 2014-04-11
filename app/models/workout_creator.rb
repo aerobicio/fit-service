@@ -1,3 +1,5 @@
+# encoding: UTF-8
+#
 require 'digest/sha1'
 
 # Service class to create a workout given a representation of a FIT or TCX file
