@@ -7,4 +7,5 @@ AllCops:
     - config/**
     - db/**
     - script/**
+    - spec/support/uploaded_activity.rb
   RunRailsCops: true

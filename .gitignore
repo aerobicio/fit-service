@@ -9,7 +9,8 @@
 /.env
 
 /bin/rubocop
-/bin/trinidad
+/bin/puma
+/bin/pumactl
 /config/database.yml
 /log/*.log
 /tmp
