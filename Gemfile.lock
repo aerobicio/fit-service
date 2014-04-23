@@ -94,6 +94,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.9.2)
     multi_xml (0.5.5)
+    newrelic_rpm (3.8.0.218)
     parser (2.1.7)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
@@ -189,6 +190,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jfit!
   lograge
+  newrelic_rpm
   puma
   rails (= 4.0.4)
   rspec-rails
