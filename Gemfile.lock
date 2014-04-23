@@ -83,6 +83,10 @@ GEM
     jdbc-postgres (9.3.1101)
     json (1.8.1)
     json (1.8.1-java)
+    lograge (0.3.0)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -184,6 +188,7 @@ DEPENDENCIES
   grape
   jbuilder (~> 1.2)
   jfit!
+  lograge
   puma
   rails (= 4.0.4)
   rspec-rails

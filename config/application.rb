@@ -23,6 +23,7 @@ module FitService
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[Rails.root.join('app', 'api', '*')]
 
+    config.lograge.enabled = true
     config.active_record.schema_format = :sql
   end
 end
