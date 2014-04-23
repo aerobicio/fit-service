@@ -14,16 +14,17 @@ class WorkoutCreator
   end
 
   def persist_workout
-    Workout.create(uuid: workout_uuid,
-                   device_id: @device_id,
-                   device_workout_id: @workout_id,
-                   active_duration: @file.active_duration,
-                   distance: @file.distance,
-                   duration: @file.duration,
-                   end_time: @file.end_time,
-                   start_time: @file.start_time,
-                   user_id: @member_id
-                  )
+    workout = Workout.create(uuid: workout_uuid,
+                             device_id: @device_id,
+                             device_workout_id: @workout_id,
+                             active_duration: @file.active_duration,
+                             distance: @file.distance,
+                             duration: @file.duration,
+                             end_time: @file.end_time,
+                             start_time: @file.start_time,
+                             user_id: @member_id,
+                             sport: @file.sport
+                            )
   end
 
   private
