@@ -1,7 +1,7 @@
 GIT
   remote: https://github.com/aerobicio/jfit.git
-  revision: 3221897d69fdeef9d9eb995835e16550a52d6eb7
-  branch: get-sport
+  revision: ee2091fa9a0db0c03d8ca184dad486d2af191f13
+  branch: master
   specs:
     jfit (0.0.1-java)
 
