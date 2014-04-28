@@ -9,6 +9,7 @@ gem 'grape', require: false
 gem 'lograge', require: false
 gem 'newrelic_rpm'
 gem 'puma', require: false
+gem 'sentry-raven', require: false
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2', require: false
