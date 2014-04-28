@@ -62,6 +62,8 @@ module Fit
       if workout.persisted? && fit_file.save
         workout
       else
+        Rails.error.log "Could not persist workout"
+        Rails.error.log workout.inspect
         fail 'lol'
       end
     end
