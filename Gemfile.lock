@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/aerobicio/jfit.git
-  revision: c8399b66a2d3f0559b0b95d24fd50e8a7ec70a1d
+  revision: ee2091fa9a0db0c03d8ca184dad486d2af191f13
   branch: master
   specs:
     jfit (0.0.1-java)
@@ -61,6 +61,8 @@ GEM
     factory_girl_rails (4.4.1)
       factory_girl (~> 4.4.0)
       railties (>= 3.0.0)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     gem_bench (0.0.8)
       bundler (> 1.2)
     grape (0.7.0)
@@ -83,6 +85,10 @@ GEM
     jdbc-postgres (9.3.1101)
     json (1.8.1)
     json (1.8.1-java)
+    lograge (0.3.0)
+      actionpack (>= 3)
+      activesupport (>= 3)
+      railties (>= 3)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -90,6 +96,8 @@ GEM
     minitest (4.7.5)
     multi_json (1.9.2)
     multi_xml (0.5.5)
+    multipart-post (2.0.0)
+    newrelic_rpm (3.8.0.218)
     parser (2.1.7)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
@@ -145,6 +153,10 @@ GEM
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
+    sentry-raven (0.8.0)
+      faraday (>= 0.7.6)
+      hashie (>= 1.1.0)
+      uuidtools
     shoulda-matchers (2.5.0)
       activesupport (>= 3.0.0)
     slop (3.5.0)
@@ -167,6 +179,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.39)
+    uuidtools (2.1.4)
     virtus (1.0.2)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -184,9 +197,12 @@ DEPENDENCIES
   grape
   jbuilder (~> 1.2)
   jfit!
+  lograge
+  newrelic_rpm
   puma
   rails (= 4.0.4)
   rspec-rails
   rubocop
   sdoc
+  sentry-raven
   shoulda-matchers

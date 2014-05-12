@@ -41,6 +41,7 @@ describe Fit::ApiV1 do
         json.include?('device_id').should be_true
         json.include?('device_workout_id').should be_true
         json.include?('user_id').should be_true
+        json.include?('sport').should be_true
       end
     end
 

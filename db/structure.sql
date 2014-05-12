@@ -3,6 +3,7 @@
 --
 
 SET statement_timeout = 0;
+SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -43,7 +44,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: activities; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: activities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE activities (
@@ -78,7 +79,7 @@ ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
 
 
 --
--- Name: authentications; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: authentications; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE authentications (
@@ -111,7 +112,7 @@ ALTER SEQUENCE authentications_id_seq OWNED BY authentications.id;
 
 
 --
--- Name: fit_files; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: fit_files; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE fit_files (
@@ -142,7 +143,7 @@ ALTER SEQUENCE fit_files_id_seq OWNED BY fit_files.id;
 
 
 --
--- Name: identities; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: identities; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE identities (
@@ -175,7 +176,7 @@ ALTER SEQUENCE identities_id_seq OWNED BY identities.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schema_migrations (
@@ -184,7 +185,7 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: tcx_files; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: tcx_files; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE tcx_files (
@@ -214,7 +215,7 @@ ALTER SEQUENCE tcx_files_id_seq OWNED BY tcx_files.id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: users; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE users (
@@ -226,7 +227,7 @@ CREATE TABLE users (
 
 
 --
--- Name: users_followings; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: users_followings; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE users_followings (
@@ -275,7 +276,7 @@ ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
--- Name: workouts; Type: TABLE; Schema: public; Owner: -; Tablespace:
+-- Name: workouts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE workouts (
@@ -290,7 +291,8 @@ CREATE TABLE workouts (
     user_id integer NOT NULL,
     device_workout_id character varying(255),
     device_id character varying(255),
-    uuid character varying(255)
+    uuid character varying(255),
+    sport character varying(255)
 );
 
 
@@ -370,7 +372,7 @@ ALTER TABLE ONLY workouts ALTER COLUMN id SET DEFAULT nextval('workouts_id_seq':
 
 
 --
--- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: activities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY activities
@@ -378,7 +380,7 @@ ALTER TABLE ONLY activities
 
 
 --
--- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: authentications_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY authentications
@@ -386,7 +388,7 @@ ALTER TABLE ONLY authentications
 
 
 --
--- Name: fit_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: fit_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY fit_files
@@ -394,7 +396,7 @@ ALTER TABLE ONLY fit_files
 
 
 --
--- Name: identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: identities_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY identities
@@ -402,7 +404,7 @@ ALTER TABLE ONLY identities
 
 
 --
--- Name: tcx_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: tcx_files_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY tcx_files
@@ -410,7 +412,7 @@ ALTER TABLE ONLY tcx_files
 
 
 --
--- Name: users_followings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: users_followings_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users_followings
@@ -418,7 +420,7 @@ ALTER TABLE ONLY users_followings
 
 
 --
--- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY users
@@ -426,7 +428,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace:
+-- Name: workouts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY workouts
@@ -434,126 +436,126 @@ ALTER TABLE ONLY workouts
 
 
 --
--- Name: index_activities_on_activity_followed_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_activities_on_activity_followed_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activities_on_activity_followed_user_id ON activities USING btree (activity_followed_user_id);
 
 
 --
--- Name: index_activities_on_activity_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_activities_on_activity_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activities_on_activity_user_id ON activities USING btree (activity_user_id);
 
 
 --
--- Name: index_activities_on_activity_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_activities_on_activity_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activities_on_activity_workout_id ON activities USING btree (activity_workout_id);
 
 
 --
--- Name: index_activities_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_activities_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_activities_on_user_id ON activities USING btree (user_id);
 
 
 --
--- Name: index_authentications_on_provider_and_uid; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_authentications_on_provider_and_uid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_authentications_on_provider_and_uid ON authentications USING btree (provider, uid);
 
 
 --
--- Name: index_authentications_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_authentications_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_authentications_on_user_id ON authentications USING btree (user_id);
 
 
 --
--- Name: index_fit_files_on_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_fit_files_on_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_fit_files_on_workout_id ON fit_files USING btree (workout_id);
 
 
 --
--- Name: index_identities_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_identities_on_email; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_identities_on_email ON identities USING btree (email);
 
 
 --
--- Name: index_tcx_files_on_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_tcx_files_on_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_tcx_files_on_workout_id ON tcx_files USING btree (workout_id);
 
 
 --
--- Name: index_user_device_id_device_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_user_device_id_device_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_user_device_id_device_workout_id ON workouts USING btree (user_id, device_id, device_workout_id);
 
 
 --
--- Name: index_users_followings_on_following_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_users_followings_on_following_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_users_followings_on_following_id ON users_followings USING btree (following_id);
 
 
 --
--- Name: index_users_followings_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_users_followings_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_users_followings_on_user_id ON users_followings USING btree (user_id);
 
 
 --
--- Name: index_users_followings_on_user_id_and_following_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_users_followings_on_user_id_and_following_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_users_followings_on_user_id_and_following_id ON users_followings USING btree (user_id, following_id);
 
 
 --
--- Name: index_workouts_on_device_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_workouts_on_device_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_workouts_on_device_id ON workouts USING btree (device_id);
 
 
 --
--- Name: index_workouts_on_device_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_workouts_on_device_workout_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_workouts_on_device_workout_id ON workouts USING btree (device_workout_id);
 
 
 --
--- Name: index_workouts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_workouts_on_user_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_workouts_on_user_id ON workouts USING btree (user_id);
 
 
 --
--- Name: index_workouts_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: index_workouts_on_uuid; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_workouts_on_uuid ON workouts USING btree (uuid);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace:
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
@@ -676,3 +678,5 @@ INSERT INTO schema_migrations (version) VALUES ('20131229035452');
 INSERT INTO schema_migrations (version) VALUES ('20140102110634');
 
 INSERT INTO schema_migrations (version) VALUES ('20140106061052');
+
+INSERT INTO schema_migrations (version) VALUES ('20140423051358');

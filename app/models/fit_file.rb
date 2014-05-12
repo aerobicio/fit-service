@@ -31,6 +31,10 @@ class FitFile < ActiveRecord::Base
     Time.zone.at(fit.session.start_time) if fit.session.start_time
   end
 
+  def sport
+    fit.session.sport
+  end
+
   private
 
   def fit
